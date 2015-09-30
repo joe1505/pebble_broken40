@@ -1,0 +1,19 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "reg@sensicomm.com",
+    "longName": "broken40",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "broken40",
+    "uuid": "008c5182-ee96-42f0-8c2b-9568c34e80ad",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
