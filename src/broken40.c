@@ -5,7 +5,7 @@
 #define BACK_COLOR GColorWhite
 #define FRONT_COLOR GColorBlack
 
-// #define BUG1MODE YES
+#define BUG1MODE YES
 
 #include <pebble.h>
 
