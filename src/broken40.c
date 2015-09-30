@@ -1,7 +1,11 @@
 // Joseph Rothweiler, Sensicomm LLC. 02Sep2015. Demo of character display problem.
+// Under the aplite emulator, the display just shows "44" with a "broken" scratch-like
+// artifact on the left "4". The right "4" is ok, and it shows up ok on the basalt emulator.
 
 #define BACK_COLOR GColorWhite
 #define FRONT_COLOR GColorBlack
+
+// #define BUG1MODE YES
 
 #include <pebble.h>
 
@@ -13,7 +17,11 @@ static void handle_second_tick(struct tm* tick_time, TimeUnits units_changed) {
         static char s_seconds_text[3]; // "00" + null.
 
         // strftime(s_seconds_text, sizeof(s_seconds_text), "%S", tick_time);
-        strcpy(s_seconds_text,"44");
+
+        // Alternate between "33" and "44"
+        s_seconds_text[0] = s_seconds_text[1] = '3' + (tick_time->tm_sec&1);
+        s_seconds_text[2] = '\0';
+
         text_layer_set_text(s_seconds_layer, s_seconds_text);
 }
 //-----------------------------------------------------------------------
@@ -25,7 +33,11 @@ static void main_window_load(Window *window) {
         GRect bounds = layer_get_frame(window_layer);
 
         // Seconds block (at bottom right).
-        s_seconds_layer = text_layer_create(GRect(bounds.size.w-44, bounds.size.h-30, 44, 31));
+#ifdef BUG1MODE
+        	s_seconds_layer = text_layer_create(GRect(bounds.size.w-44, bounds.size.h-30, 44, 31));
+#else
+        	s_seconds_layer = text_layer_create(GRect(bounds.size.w-48, bounds.size.h-32, 46, 32));
+#endif
         text_layer_set_text_color(s_seconds_layer, FRONT_COLOR);
         text_layer_set_background_color(s_seconds_layer, GColorClear);
 
